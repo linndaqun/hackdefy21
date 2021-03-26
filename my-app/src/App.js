@@ -1,3 +1,5 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
 import logo from './logo.svg';
 import './App.css';
 
@@ -21,5 +23,8 @@ function App() {
     </div>
   );
 }
+
+const mountNode = document.querySelector('#root');
+ReactDOM.render(<App />, mountNode);
 
 export default App;
