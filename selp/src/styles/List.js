@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 
 export const List = styled.ul`
+<<<<<<< HEAD
 padding: 0px 25px 25px 25px;
 margin: 0px;  
 max-width: 100%;
@@ -12,6 +13,14 @@ max-width: 100%;
   list-style-position: inside;
   margin-left:auto;
     margin-right: auto;
+=======
+  padding: 10px;
+  margin: auto;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+>>>>>>> 79944003bc605b061a40be48e959bf32642b311e
 `;
 
 export const ListItem = styled.li`
