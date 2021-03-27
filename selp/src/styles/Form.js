@@ -13,6 +13,7 @@ export const Input = styled.input`
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
+  margin-left:auto;
 `;
 
 export const Button = styled.button`
@@ -33,11 +34,21 @@ color: #fff;
   user-select: none;
   &:hover {
     cursor: pointer;
+<<<<<<< HEAD
     background-color: #FF6F97;
     border-color: #FF6F97;
   }
   &:active {
     background-color: #FF6F97;
     border-color: #FF6F97;
+=======
+    background-color: #6665dd;
+    border-color: #0062cc;
   }
+  &:active {
+    background-color: #473bf0;
+    border-color: #005cbf;
+>>>>>>> main
+  }
+  margin-right: auto;
 `;

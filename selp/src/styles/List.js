@@ -16,18 +16,24 @@ max-width: 100%;
 =======
   padding: 10px;
   margin: auto;
-  max-width: 100%;
+  max-width: 50%;
   display: flex;
   flex-direction: column;
   background-color: #fff;
+<<<<<<< HEAD
 >>>>>>> 79944003bc605b061a40be48e959bf32642b311e
+=======
+  text-align: center;
+  list-style-position: inside;
+  margin-left:auto;
+  margin-right: auto;
+>>>>>>> main
 `;
 
 export const ListItem = styled.li`
   display: block;
   padding: 3rem 5rem;
-  background-color: #fff;
-  text-align: center;
+  background-color: #acadbc;
   color: #06D6A0;
   font-weight: bold;
   font-size: 25px;
@@ -70,12 +76,6 @@ export const ListItemWithLink = styled.li`
       border-top-width: 1px;
       border-top-left-radius: 0rem;
       border-top-right-radius: 0rem;
-    }
-  }
-  &:last-of-type {
-    a {
-      border-bottom-right-radius: 0.25rem;
-      border-bottom-left-radius: 0.25rem;
     }
   }
 `;

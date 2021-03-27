@@ -41,7 +41,7 @@ const client = new ApolloClient({
 const App = () => (
   <div
     style={{
-        backgroundColor: '#C6F5FF'}}>
+        backgroundColor: '#9B9ECE'}}>
     <BrowserRouter>
     <ApolloProvider client={client}>
       <Switch>
