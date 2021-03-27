@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLazyQuery, gql } from "@apollo/client";
 import Search from "./Search";
 import Classes from "./Classes";
-
+import "../App.css";
 const SEARCH = gql`
   query Search($match: String) {
     classes(order_by: { name: asc }, where: { name: { _ilike: $match } }) {
@@ -19,6 +19,10 @@ const ClassSearch = () => {
 
   return (
     <div>
+      <h1>
+      {'Schelp'}
+
+      </h1>
       <Search
         inputVal={inputVal}
         onChange={(e) => setInputVal(e.target.value)}

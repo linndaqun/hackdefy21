@@ -31,11 +31,11 @@ export const Button = styled.button`
   user-select: none;
   &:hover {
     cursor: pointer;
-    background-color: #33FFEB;
+    background-color: #6665dd;
     border-color: #0062cc;
   }
   &:active {
-    background-color: #0062cc;
+    background-color: #473bf0;
     border-color: #005cbf;
   }
 `;
