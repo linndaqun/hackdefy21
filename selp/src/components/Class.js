@@ -3,7 +3,9 @@ import { useSubscription, gql, useMutation } from "@apollo/client";
 import { List, ListItem } from "../styles/List";
 import { Badge } from "../styles/Badge";
 import InputForm from "../styles/InputForm";
-
+import Rating from '@material-ui/lab/Rating';
+import Box from '@material-ui/core/Box';
+import labels from "../styles/InputForm";
 
 const CLASS = gql`
     subscription Class($id: uuid!) {
@@ -71,7 +73,11 @@ const Class = ({
       />
       <List>
         {reviews.map((review) => (
-          <ListItem key={review.id}>{review.body}</ListItem>
+          <ListItem key={review.id}>{review.body}
+          <Box component="fieldset" mb={3} borderColor="transparent">
+            <Rating name="read-only" value={review.rating} readOnly>{labels[review.rating !== null ? review.rating : 0]}</Rating>
+          </Box>
+          </ListItem>
         ))}
       </List>
     </div>

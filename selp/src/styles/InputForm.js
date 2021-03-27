@@ -13,7 +13,7 @@ const Container = styled.div`
   }
 `;
 
-const labels = {
+export const labels = {
     0.5: 'Useless',
     1: 'Useless+',
     1.5: 'Poor',
