@@ -3,7 +3,7 @@ import { useSubscription, gql, useMutation } from "@apollo/client";
 import { List, ListItem } from "../styles/List";
 import { Badge } from "../styles/Badge";
 import InputForm from "../styles/InputForm";
-import Rating from "../styles/Rating";
+
 
 const CLASS = gql`
     subscription Class($id: uuid!) {
@@ -15,18 +15,20 @@ const CLASS = gql`
           id
           body
           created_at
+          rating
         }
         }
     }
 `;
 
 const ADD_REVIEW = gql`
-  mutation($body: String!, $id: uuid!) {
-    AddReview(body: $body, id: $id) {
+  mutation ($body: String!, $id: uuid!, $rating: Int!) {
+    AddReviewRating(body: $body, id: $id, rating: $rating) {
       affected_rows
     }
   }
 `;
+
 
 const Class = ({
   match: {
@@ -34,6 +36,7 @@ const Class = ({
   },
 }) => {
   const [ inputVal, setInputVal ] = useState("");
+  const [ rating, setRating ] = useState(0);
   const { loading, error, data } = useSubscription(CLASS, {
     variables: { id },
   });
@@ -52,16 +55,20 @@ const Class = ({
       </h3>
       <InputForm
         inputVal={inputVal}
+        rating={rating}
         onChange={(e) => setInputVal(e.target.value)}
+        onRatingChange={(event, newValue) => {
+          setRating(newValue);
+        }}
         onSubmit={() => {
-          addReview({ variables : {id, body : inputVal}})
+          addReview({ variables : {body : inputVal, id, rating: rating}})
           .then(() => setInputVal(""))
+          .then(() => setRating(0))
           .catch((e) => {setInputVal(e.message);
           });
         } }
         buttonText="Submit"
       />
-      <Rating/>
       <List>
         {reviews.map((review) => (
           <ListItem key={review.id}>{review.body}</ListItem>
