@@ -6,9 +6,9 @@ import Classes from "./Classes";
 const SEARCH = gql`
   query Search($match: String) {
     classes(order_by: { name: asc }, where: { name: { _ilike: $match } }) {
+      id
       name
       discipline
-      id
     }
   }
 `;
