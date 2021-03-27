@@ -8,10 +8,14 @@ import styled from "@emotion/styled";
 export const List = styled.ul`
   padding: 10px;
   margin: auto;
-  max-width: 100%;
+  max-width: 50%;
   display: flex;
   flex-direction: column;
   background-color: #fff;
+  text-align: center;
+  list-style-position: inside;
+  margin-left:auto;
+  margin-right: auto;
 `;
 
 export const ListItem = styled.li`
