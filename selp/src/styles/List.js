@@ -1,10 +1,13 @@
 import styled from "@emotion/styled";
 
+export const Header = styled.h1`
+  font-size: 30px;
+`;
 
 export const List = styled.ul`
-<<<<<<< HEAD
 padding: 0px 25px 25px 25px;
 margin: 0px;  
+border-radius: 0.3rem !important;
 max-width: 100%;
   display: flex;
   font-size: 25px;
@@ -13,27 +16,13 @@ max-width: 100%;
   list-style-position: inside;
   margin-left:auto;
     margin-right: auto;
-=======
-  padding: 10px;
-  margin: auto;
-  max-width: 50%;
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-<<<<<<< HEAD
->>>>>>> 79944003bc605b061a40be48e959bf32642b311e
-=======
-  text-align: center;
-  list-style-position: inside;
-  margin-left:auto;
-  margin-right: auto;
->>>>>>> main
 `;
 
 export const ListItem = styled.li`
   display: block;
   padding: 3rem 5rem;
-  background-color: #acadbc;
+  background-color: #fff;
+  text-align: center;
   color: #06D6A0;
   font-weight: bold;
   font-size: 25px;
@@ -76,6 +65,12 @@ export const ListItemWithLink = styled.li`
       border-top-width: 1px;
       border-top-left-radius: 0rem;
       border-top-right-radius: 0rem;
+    }
+  }
+  &:last-of-type {
+    a {
+      border-bottom-right-radius: 0.25rem;
+      border-bottom-left-radius: 0.25rem;
     }
   }
 `;

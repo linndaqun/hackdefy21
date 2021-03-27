@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 
 export const Input = styled.input`
-  height: calc(1.5em + 1rem + 2px);
-  padding: 0px;
+  padding: 6px;
   margin: 25px;
+  margin-left: 25px !important;
   font-size: 2.4rem;
   line-height: 1.5;
   border-radius: 0.3rem;
@@ -17,8 +17,9 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-padding: 0px;
-margin: 25px;  
+padding: 0px 10px !important;
+margin: 25px !important; 
+border-radius: 0.3rem !important;
 color: #fff;
   background-color: #EF476F;
   border-color: #EF476F;
@@ -34,21 +35,12 @@ color: #fff;
   user-select: none;
   &:hover {
     cursor: pointer;
-<<<<<<< HEAD
     background-color: #FF6F97;
     border-color: #FF6F97;
   }
   &:active {
     background-color: #FF6F97;
     border-color: #FF6F97;
-=======
-    background-color: #6665dd;
-    border-color: #0062cc;
-  }
-  &:active {
-    background-color: #473bf0;
-    border-color: #005cbf;
->>>>>>> main
   }
   margin-right: auto;
 `;
