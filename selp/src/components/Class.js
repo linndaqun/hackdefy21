@@ -31,6 +31,15 @@ const ADD_REVIEW = gql`
   }
 `;
 
+export function getAvg(reviews) {
+  var total = 0;
+  for(var i = 0; i < reviews.length; i++) {
+      total += reviews[i].rating;
+  }
+  var avg = total / reviews.length;
+  return avg;
+}
+
 
 const Class = ({
   match: {
@@ -49,11 +58,13 @@ const Class = ({
   if (error) return <p>Error :( {error.message}</p>;
 
   const { name, discipline, reviews } = data.classes_by_pk;
+  var ratingAvg = getAvg(reviews);
 
   return (
     <div>
       <h3>
         {name} <Badge>{discipline}</Badge>
+        <Rating name="read-only" value={ratingAvg} readOnly>{labels[ratingAvg !== null ? ratingAvg : 2.5]}</Rating>
       </h3>
       <InputForm
         inputVal={inputVal}
