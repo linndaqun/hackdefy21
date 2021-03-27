@@ -44,6 +44,9 @@ export const ListItemWithLink = styled.li`
     padding: 3rem 5rem;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-top-width: 0;
+    margin-left:auto;
+    margin-right: auto;
+  
     &:hover {
       color: #fff;
       background-color: #bababa;
@@ -54,8 +57,8 @@ export const ListItemWithLink = styled.li`
   &:first-of-type {
     a {
       border-top-width: 1px;
-      border-top-left-radius: 0.25rem;
-      border-top-right-radius: 0.25rem;
+      border-top-left-radius: 0rem;
+      border-top-right-radius: 0rem;
     }
   }
   &:last-of-type {
