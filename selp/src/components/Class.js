@@ -1,10 +1,10 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useSubscription, gql } from "@apollo/client";
 import { List, ListItem } from "../styles/List";
 import { Badge } from "../styles/Badge";
 
 const CLASS = gql`
-    query Class($id: uuid!) {
+    subscription Class($id: uuid!) {
         classes_by_pk(id: $id) {
         id
         name
@@ -22,7 +22,7 @@ const Class = ({
     params: { id },
   },
 }) => {
-  const { loading, error, data } = useQuery(CLASS, {
+  const { loading, error, data } = useSubscription(CLASS, {
     variables: { id },
   });
 
