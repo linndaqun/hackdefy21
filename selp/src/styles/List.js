@@ -1,17 +1,17 @@
 import styled from "@emotion/styled";
 
-// export const Body = styled.body`
-//   background-color: #92B9BD;
-// `;
-
 
 export const List = styled.ul`
-  padding: 10px;
-  margin: auto;
-  max-width: 100%;
+padding: 0px 25px 25px 25px;
+margin: 0px;  
+max-width: 100%;
   display: flex;
+  font-size: 25px;
   flex-direction: column;
-  background-color: #fff;
+  text-align: center;
+  list-style-position: inside;
+  margin-left:auto;
+    margin-right: auto;
 `;
 
 export const ListItem = styled.li`
@@ -41,9 +41,14 @@ export const ListItemWithLink = styled.li`
   > a {
     display: block;
     background-color: #fff;
+    color: #06D6A0;
+    text-decoration: none;
     padding: 3rem 5rem;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-top-width: 0;
+    margin-left:auto;
+    margin-right: auto;
+  
     &:hover {
       color: #fff;
       background-color: #bababa;
@@ -54,8 +59,8 @@ export const ListItemWithLink = styled.li`
   &:first-of-type {
     a {
       border-top-width: 1px;
-      border-top-left-radius: 0.25rem;
-      border-top-right-radius: 0.25rem;
+      border-top-left-radius: 0rem;
+      border-top-right-radius: 0rem;
     }
   }
   &:last-of-type {
