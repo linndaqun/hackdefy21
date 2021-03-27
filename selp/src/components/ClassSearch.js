@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLazyQuery, gql } from "@apollo/client";
-import InputForm from "../styles/InputForm";
+import Search from "./Search";
 import Classes from "./Classes";
 
 const SEARCH = gql`
@@ -19,10 +19,10 @@ const ClassSearch = () => {
 
   return (
     <div>
-      <InputForm
+      <Search
         inputVal={inputVal}
         onChange={(e) => setInputVal(e.target.value)}
-        onSubmit={() => search({ variables: { match: `%${inputVal}%` } })}
+        onSearch={() => search({ variables: { match: `%${inputVal}%` } })}
       />
       <Classes newClasses={data ? data.classes : null} />
     </div>
