@@ -6,6 +6,7 @@ import InputForm from "../styles/InputForm";
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import labels from "../styles/InputForm";
+import "../App.css";
 
 const CLASS = gql`
     subscription Class($id: uuid!) {
@@ -62,10 +63,16 @@ const Class = ({
 
   return (
     <div>
-      <h3>
+      <h1 align='left' padding='10px'>
+      
+      {'Schelp'}
+      </h1>
+      <h3 align='center'>
+      
         {name} <Badge>{discipline}</Badge>
         <Rating name="read-only" value={ratingAvg} readOnly>{labels[ratingAvg !== null ? ratingAvg : 2.5]}</Rating>
       </h3>
+      
       <InputForm
         inputVal={inputVal}
         rating={rating}

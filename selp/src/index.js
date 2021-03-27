@@ -39,7 +39,10 @@ const client = new ApolloClient({
 });
 
 const App = () => (
-  <BrowserRouter>
+  <div
+    style={{
+        backgroundColor: '#C6F5FF'}}>
+    <BrowserRouter>
     <ApolloProvider client={client}>
       <Switch>
         <Route path="/class/:id" component={Class} />
@@ -47,6 +50,8 @@ const App = () => (
       </Switch>
     </ApolloProvider>
   </BrowserRouter>
+  </div>
+  
 );
 
 render(<App />, document.getElementById("root"));
