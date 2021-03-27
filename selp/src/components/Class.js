@@ -19,6 +19,7 @@ const CLASS = gql`
           created_at
           rating
         }
+        rating
         }
     }
 `;
@@ -31,15 +32,22 @@ const ADD_REVIEW = gql`
   }
 `;
 
-export function getAvg(reviews) {
+export function getAvg(newRating, reviews) {
   var total = 0;
   for(var i = 0; i < reviews.length; i++) {
       total += reviews[i].rating;
   }
-  var avg = total / reviews.length;
-  return avg;
+  var avg = (total + newRating) / (reviews.length + 1);
+  return Math.round(avg);
 }
 
+const UPDATE_RATING = gql `
+  mutation ($id: uuid!, $rating: Int!) {
+    UpdateClassRating(id: $id, rating: $rating) {
+      rating
+    }
+  }
+`;
 
 const Class = ({
   match: {
@@ -47,38 +55,41 @@ const Class = ({
   },
 }) => {
   const [ inputVal, setInputVal ] = useState("");
-  const [ rating, setRating ] = useState(0);
+  const [ ratingNew, setRating ] = useState(0);
   const { loading, error, data } = useSubscription(CLASS, {
     variables: { id },
   });
 
   const [addReview] = useMutation(ADD_REVIEW);
+  const [updateRating] = useMutation(UPDATE_RATING);
 
   if (loading) return <p>Loading ...</p>;
   if (error) return <p>Error :( {error.message}</p>;
 
-  const { name, discipline, reviews } = data.classes_by_pk;
-  var ratingAvg = getAvg(reviews);
+  const { name, discipline, reviews, rating } = data.classes_by_pk;
+  var ratingAvg;
 
   return (
     <div>
       <h3>
         {name} <Badge>{discipline}</Badge>
-        <Rating name="read-only" value={ratingAvg} readOnly>{labels[ratingAvg !== null ? ratingAvg : 2.5]}</Rating>
+        <Rating name="simple-controlled" value={rating} readOnly>{labels[rating !== null ? rating : 2.5]}</Rating>
       </h3>
       <InputForm
         inputVal={inputVal}
-        rating={rating}
+        rating={ratingNew}
         onChange={(e) => setInputVal(e.target.value)}
         onRatingChange={(event, newValue) => {
           setRating(newValue);
         }}
         onSubmit={() => {
-          addReview({ variables : {body : inputVal, id, rating: rating}})
+          ratingAvg = getAvg(ratingNew, reviews);
+          addReview({ variables : {body : inputVal, id, rating: ratingNew}})
           .then(() => setInputVal(""))
           .then(() => setRating(0))
-          .catch((e) => {setInputVal(e.message);
-          });
+          .catch((e) => {});
+          updateRating({ variables : { id, rating: ratingAvg}})
+          .catch((e) => {});
         } }
         buttonText="Submit"
       />
