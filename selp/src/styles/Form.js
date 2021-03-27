@@ -31,7 +31,7 @@ export const Button = styled.button`
   user-select: none;
   &:hover {
     cursor: pointer;
-    background-color: #0069d9;
+    background-color: #33FFEB;
     border-color: #0062cc;
   }
   &:active {
