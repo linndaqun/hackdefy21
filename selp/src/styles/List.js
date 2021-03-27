@@ -1,21 +1,30 @@
 import styled from "@emotion/styled";
 
+// export const Body = styled.body`
+//   background-color: #92B9BD;
+// `;
+
+
 export const List = styled.ul`
-  padding: 0;
-  margin: 0 0 300px;
-  max-width: 600px;
+  padding: 10px;
+  margin: auto;
+  max-width: 50%;
   display: flex;
   flex-direction: column;
+  background-color: #fff;
   text-align: center;
   list-style-position: inside;
   margin-left:auto;
-    margin-right: auto;
+  margin-right: auto;
 `;
 
 export const ListItem = styled.li`
   display: block;
   padding: 3rem 5rem;
   background-color: #acadbc;
+  color: #06D6A0;
+  font-weight: bold;
+  font-size: 25px;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-top-width: 0;
   &:first-of-type {

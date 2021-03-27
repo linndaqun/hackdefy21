@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const Input = styled.input`
   height: calc(1.5em + 1rem + 2px);
   padding: 0.5rem 1rem;
+  max-width: 70%;
   margin: 2rem 0;
   font-size: 2.4rem;
   line-height: 1.5;
@@ -13,6 +14,7 @@ export const Input = styled.input`
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
+  margin-left:auto;
 `;
 
 export const Button = styled.button`
@@ -38,4 +40,5 @@ export const Button = styled.button`
     background-color: #473bf0;
     border-color: #005cbf;
   }
+  margin-right: auto;
 `;
