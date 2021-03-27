@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
-import { List, ListItem } from "../styles/List";
+import { Link } from "react-router-dom";
+import { List, ListItemWithLink } from "../styles/List";
 import { Badge } from "../styles/Badge";
 
 const CLASSES = gql`
@@ -18,9 +19,11 @@ const Classes = ({ newClasses }) => {
   
     const renderClasses = (classes) => { 
         return classes.map(({id, name, discipline}) =>(
-                <ListItem key={id}>
-                    {name} <Badge>{discipline}</Badge>
-                </ListItem>
+                <ListItemWithLink key={id}>
+                    <Link to={`/class/${id}`} >
+                        {name} <Badge>{discipline}</Badge>
+                    </Link>
+                </ListItemWithLink>
             ));
         };
     if (loading) return <p>Loading ...</p>;
