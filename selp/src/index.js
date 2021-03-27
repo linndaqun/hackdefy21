@@ -2,7 +2,8 @@ import React from "react";
 import { render } from "react-dom";
 import { ApolloProvider } from "@apollo/client";
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
-import Classes from "./components/Classes";
+import ClassSearch from "./components/ClassSearch";
+import "./index.css"
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -13,7 +14,7 @@ const client = new ApolloClient({
 
 const App = () => (
   <ApolloProvider client={client}>
-    <Classes />
+    <ClassSearch />
   </ApolloProvider>
 );
 
