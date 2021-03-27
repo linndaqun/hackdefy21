@@ -6,9 +6,14 @@ import InputForm from "../styles/InputForm";
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import labels from "../styles/InputForm";
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import "../App.css";
 
-const CLASS = gql`
+const CLASS_TIME = gql`
     subscription Class($id: uuid!) {
         classes_by_pk(id: $id) {
         id
@@ -23,6 +28,23 @@ const CLASS = gql`
         rating
         }
     }
+`;
+
+const CLASS_RATING = gql`
+  subscription Class($id: uuid!) {
+    classes_by_pk(id: $id) {
+    id
+    name
+    discipline
+    reviews(order_by: {rating: desc}) {
+      id
+      body
+      created_at
+      rating
+    }
+    rating
+    }
+  }
 `;
 
 const ADD_REVIEW = gql`
@@ -50,13 +72,25 @@ const UPDATE_RATING = gql `
   }
 `;
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
 const Class = ({
   match: {
     params: { id },
   },
 }) => {
+  const classes = useStyles();
   const [ inputVal, setInputVal ] = useState("");
   const [ ratingNew, setRating ] = useState(0);
+  const [CLASS, setCLASS] = useState(CLASS_TIME);
   const { loading, error, data } = useSubscription(CLASS, {
     variables: { id },
   });
@@ -70,18 +104,40 @@ const Class = ({
   const { name, discipline, reviews, rating } = data.classes_by_pk;
   var ratingAvg;
 
+  const handleChange = (event) => {
+    if (event.target.value == CLASS_TIME){
+      setCLASS(CLASS_TIME)
+    }
+    else if (event.target.value == CLASS_RATING) {
+      setCLASS(CLASS_RATING);
+    }
+  }
+
   return (
     <div>
       <h1 align='left' padding='10px'>
-      
       {'Schelp'}
       </h1>
       <h3 align='center'>
-      
         {name} <Badge>{discipline}</Badge>
         <Rating name="simple-controlled" value={rating} readOnly>{labels[rating !== null ? rating : 2.5]}</Rating>
       </h3>
-      
+      <FormControl className={classes.formControl}>
+        <InputLabel shrink id="demo-simple-select-placeholder-label-label">
+          Sort By:
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-placeholder-label-label"
+          id="demo-simple-select-placeholder-label"
+          value={CLASS}
+          onChange={handleChange}
+          displayEmpty
+          className={classes.selectEmpty}
+        >
+          <MenuItem value={CLASS_TIME}>Review Submitted</MenuItem>
+          <MenuItem value={CLASS_RATING}>Rating</MenuItem>
+        </Select>
+      </FormControl>      
       <InputForm
         inputVal={inputVal}
         rating={ratingNew}
