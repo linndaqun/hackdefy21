@@ -3,6 +3,7 @@ import { useSubscription, gql, useMutation } from "@apollo/client";
 import { List, ListItem } from "../styles/List";
 import { Badge } from "../styles/Badge";
 import InputForm from "../styles/InputForm";
+import Rating from "../styles/Rating";
 
 const CLASS = gql`
     subscription Class($id: uuid!) {
@@ -60,6 +61,7 @@ const Class = ({
         } }
         buttonText="Submit"
       />
+      <Rating/>
       <List>
         {reviews.map((review) => (
           <ListItem key={review.id}>{review.body}</ListItem>
