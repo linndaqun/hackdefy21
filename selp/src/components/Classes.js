@@ -8,12 +8,12 @@ import Rating from '@material-ui/lab/Rating';
 
 const CLASSES = gql`
 {
-    classes {
+    classes(order_by: {rating: desc}) {
         id
         name
         discipline
         rating
-    }
+      }
   }
 `;
 
