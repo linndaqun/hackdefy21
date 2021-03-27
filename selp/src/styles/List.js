@@ -21,8 +21,7 @@ export const List = styled.ul`
 export const ListItem = styled.li`
   display: block;
   padding: 3rem 5rem;
-  background-color: #fff;
-  text-align: center;
+  background-color: #acadbc;
   color: #06D6A0;
   font-weight: bold;
   font-size: 25px;
@@ -63,12 +62,6 @@ export const ListItemWithLink = styled.li`
       border-top-width: 1px;
       border-top-left-radius: 0rem;
       border-top-right-radius: 0rem;
-    }
-  }
-  &:last-of-type {
-    a {
-      border-bottom-right-radius: 0.25rem;
-      border-bottom-left-radius: 0.25rem;
     }
   }
 `;

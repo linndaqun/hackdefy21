@@ -11,6 +11,6 @@ export const Badge = styled.span`
   vertical-align: middle;
   border-radius: 0.25rem;
   color: #fff;
-  background-color: #1B9AAA;
+  background-color: #acadbc;
   margin: 0 1rem;
 `;
