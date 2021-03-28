@@ -11,8 +11,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Grid from '@material-ui/core/Grid';
 import "../App.css";
-import { spacing } from '@material-ui/system';
 
 const CLASS_TIME = gql`
     subscription Class($id: uuid!) {
@@ -27,6 +27,8 @@ const CLASS_TIME = gql`
           rating
         }
         rating
+        location
+        duration
         }
     }
 `;
@@ -75,7 +77,7 @@ const UPDATE_RATING = gql `
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1,1,1,72),
+    margin: theme.spacing(1,1,1,125),
     minWidth: 120,
   },
   selectEmpty: {
@@ -84,7 +86,6 @@ const useStyles = makeStyles((theme) => ({
   introduction: {
     margin: theme.spacing(1,1,1,60),
   },
-
 }));
 
 const Class = ({
@@ -106,7 +107,7 @@ const Class = ({
   if (loading) return <p>Loading ...</p>;
   if (error) return <p>Error :( {error.message}</p>;
 
-  const { name, discipline, reviews, rating } = data.classes_by_pk;
+  const { name, discipline, reviews, rating, location, duration } = data.classes_by_pk;
   var ratingAvg;
 
   const handleChange = (event) => {
@@ -128,27 +129,10 @@ const Class = ({
         <Rating name="simple-controlled" value={rating} readOnly>{labels[rating !== null ? rating : 2.5]}</Rating>
       </h3>
       <Box className={classes.introduction} >
-
-        <p>{name} teaches {discipline} at blank school </p>
-        <p>{name} has been teaching for blank year(s)</p>
+        <h4>Teacher/School's Bio: </h4>
+        <p>{name} teaches {discipline} at {location} </p>
+        <p>{name} has been teaching for {duration} years</p>
       </Box>
-      <FormControl className={classes.formControl} >
-        
-        <InputLabel shrink id="demo-simple-select-placeholder-label-label">
-          Sort By:
-        </InputLabel>
-        <Select
-          labelId="demo-simple-select-placeholder-label-label"
-          id="demo-simple-select-placeholder-label"
-          value={CLASS}
-          onChange={handleChange}
-          displayEmpty
-          className={classes.selectEmpty}
-        >
-          <MenuItem value={CLASS_TIME}>Most Recent</MenuItem>
-          <MenuItem value={CLASS_RATING}>Rating</MenuItem>
-        </Select>
-      </FormControl> 
       <InputForm
         inputVal={inputVal}
         rating={ratingNew}
@@ -167,15 +151,42 @@ const Class = ({
         } }
         buttonText="Submit"
       />
-      <List>
-        {reviews.map((review) => (
-          <ListItem key={review.id}>{review.body}
-          <Box component="fieldset" mb={3} borderColor="transparent">
-            <Rating name="read-only" value={review.rating} readOnly>{labels[review.rating !== null ? review.rating : 0]}</Rating>
-          </Box>
-          </ListItem>
-        ))}
-      </List>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="flex-start"
+      >
+      <Grid item>
+        <FormControl className={classes.formControl} >
+        <InputLabel shrink id="demo-simple-select-placeholder-label-label">
+          Sort By:
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-placeholder-label-label"
+          id="demo-simple-select-placeholder-label"
+          value={CLASS}
+          onChange={handleChange}
+          displayEmpty
+          className={classes.selectEmpty}
+        >
+          <MenuItem value={CLASS_TIME}>Most Recent</MenuItem>
+          <MenuItem value={CLASS_RATING}>Rating</MenuItem>
+        </Select>
+      </FormControl>
+      </Grid>
+      <Grid item>
+        <List>
+          {reviews.map((review) => (
+            <ListItem key={review.id}>{review.body}
+            <Box component="fieldset" mb={3} borderColor="transparent">
+              <Rating name="read-only" value={review.rating} readOnly>{labels[review.rating !== null ? review.rating : 0]}</Rating>
+            </Box>
+            </ListItem>
+          ))}
+        </List>
+      </Grid>
+      </Grid>
     </div>
   );
 };

@@ -45,3 +45,7 @@ h1{
 text-align: center;
 margin-block-start: 0em;
 }
+
+h3{
+  font-size: 3em;
+}
