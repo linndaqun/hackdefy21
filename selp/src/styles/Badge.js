@@ -11,9 +11,18 @@ export const Badge = styled.span`
   vertical-align: middle;
   border-radius: 0.25rem;
   color: #fff;
-
-
-  background-color: #acadbc;
-
+  background-color: #1B9AAA;
   margin: 0 1rem;
 `;
+
+// export const InputLabel = styled.div `
+//   margin: 25px;
+// `;
+
+// export const Select = styled.div `
+//  margin: 25px;
+// `;
+
+// export const FormControl = styled.div `
+//   margin: 25px;
+// `;

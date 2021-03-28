@@ -1,25 +1,29 @@
 import styled from "@emotion/styled";
 
+export const Header = styled.h1`
+  font-size: 30px;
+`;
+
 export const List = styled.ul`
-  padding: 10px;
-  margin: auto;
-  max-width: 70%;
+padding: 0px 25px 25px 25px;
+margin: 0px;  
+border-radius: 0.3rem !important;
+max-width: 100%;
+
   display: flex;
+  font-size: 25px;
   flex-direction: column;
-  background-color: #fff;
   text-align: center;
   list-style-position: inside;
   margin-left:auto;
-  margin-right: auto;
+    margin-right: auto;
 `;
 
 export const ListItem = styled.li`
   display: block;
   padding: 3rem 5rem;
-  background-color: #acadbc;
-
+  background-color: #fff;
   text-align: center;
-
   color: #06D6A0;
   font-weight: bold;
   font-size: 25px;
@@ -42,6 +46,8 @@ export const ListItemWithLink = styled.li`
   > a {
     display: block;
     background-color: #fff;
+    color: #06D6A0;
+    text-decoration: none;
     padding: 3rem 5rem;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-top-width: 0;
@@ -60,6 +66,12 @@ export const ListItemWithLink = styled.li`
       border-top-width: 1px;
       border-top-left-radius: 0rem;
       border-top-right-radius: 0rem;
+    }
+  }
+  &:last-of-type {
+    a {
+      border-bottom-right-radius: 0.25rem;
+      border-bottom-left-radius: 0.25rem;
     }
   }
 `;
