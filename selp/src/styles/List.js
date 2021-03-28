@@ -8,7 +8,7 @@ export const List = styled.ul`
 padding: 0px 25px 25px 25px;
 margin: 0px;  
 border-radius: 0.3rem !important;
-max-width: 85%;
+max-width: 100%;
 
   display: flex;
   font-size: 25px;
@@ -53,6 +53,7 @@ export const ListItemWithLink = styled.li`
     border-top-width: 0;
     margin-left:auto;
     margin-right: auto;
+    max-width: 50%;
   
     &:hover {
       color: #fff;
