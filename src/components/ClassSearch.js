@@ -60,7 +60,7 @@ const ClassSearch = () => {
   const classes = useStyles();
 
   const handleChange = (event) => {
-    if (event.target.value == SEARCH) {
+    if (event.target.value === SEARCH) {
       setSearchType(SEARCH);
       search({ variables: { match: `%${""}%` } });
     }

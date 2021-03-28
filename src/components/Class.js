@@ -121,10 +121,10 @@ const Class = ({
   var ratingAvg;
 
   const handleChange = (event) => {
-    if (event.target.value == CLASS_TIME){
+    if (event.target.value === CLASS_TIME){
       setCLASS(CLASS_TIME)
     }
-    else if (event.target.value == CLASS_RATING) {
+    else if (event.target.value === CLASS_RATING) {
       setCLASS(CLASS_RATING);
     }
   }
