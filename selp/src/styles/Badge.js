@@ -12,6 +12,7 @@ export const Badge = styled.span`
   border-radius: 0.25rem;
   color: #fff;
 
+
   background-color: #acadbc;
 
   margin: 0 1rem;
