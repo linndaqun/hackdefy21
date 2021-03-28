@@ -12,6 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import "../App.css";
+import { spacing } from '@material-ui/system';
 
 const CLASS_TIME = gql`
     subscription Class($id: uuid!) {
@@ -74,12 +75,16 @@ const UPDATE_RATING = gql `
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(1,1,1,72),
     minWidth: 120,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  introduction: {
+    margin: theme.spacing(1,1,1,60),
+  },
+
 }));
 
 const Class = ({
@@ -115,14 +120,20 @@ const Class = ({
 
   return (
     <div>
-      <h1 align='left' padding='10px'>
+      <h1 align='middle'>
       {'Schelp'}
       </h1>
       <h3 align='center'>
         {name} <Badge>{discipline}</Badge>
         <Rating name="simple-controlled" value={rating} readOnly>{labels[rating !== null ? rating : 2.5]}</Rating>
       </h3>
-      <FormControl className={classes.formControl}>
+      <Box className={classes.introduction} >
+
+        <p>{name} teaches {discipline} at blank school </p>
+        <p>{name} has been teaching for blank year(s)</p>
+      </Box>
+      <FormControl className={classes.formControl} >
+        
         <InputLabel shrink id="demo-simple-select-placeholder-label-label">
           Sort By:
         </InputLabel>
@@ -134,10 +145,10 @@ const Class = ({
           displayEmpty
           className={classes.selectEmpty}
         >
-          <MenuItem value={CLASS_TIME}>Review Submitted</MenuItem>
+          <MenuItem value={CLASS_TIME}>Most Recent</MenuItem>
           <MenuItem value={CLASS_RATING}>Rating</MenuItem>
         </Select>
-      </FormControl>      
+      </FormControl> 
       <InputForm
         inputVal={inputVal}
         rating={ratingNew}
