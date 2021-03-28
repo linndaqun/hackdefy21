@@ -1,14 +1,9 @@
 import styled from "@emotion/styled";
 
-// export const Body = styled.body`
-//   background-color: #92B9BD;
-// `;
-
-
 export const List = styled.ul`
   padding: 10px;
   margin: auto;
-  max-width: 50%;
+  max-width: 70%;
   display: flex;
   flex-direction: column;
   background-color: #fff;
