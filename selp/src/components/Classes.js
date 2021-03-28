@@ -25,6 +25,7 @@ const Classes = ({ newClasses }) => {
                 <ListItemWithLink key={id}>
                     <Link to={`/class/${id}`} >
                         {name} <Badge>{discipline}</Badge>
+                        <p></p>
                         <Rating name="read-only" value={rating} readOnly>{labels[rating !== null ? rating : 3]}</Rating>
                     </Link>
                 </ListItemWithLink>
