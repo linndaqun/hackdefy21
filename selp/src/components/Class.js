@@ -12,6 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
+import styled from "@emotion/styled";
 import "../App.css";
 
 const CLASS_TIME = gql`
@@ -88,6 +89,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const Button = styled.button`
+  background-color: transparent;
+  color: black;
+  font-size: 30px;
+  border-color: transparent;
+  padding: 10px 550px;
+  margin: 10px 10px;
+`;
+
 const Class = ({
   match: {
     params: { id },
@@ -121,9 +131,11 @@ const Class = ({
 
   return (
     <div>
-      <h1 align='middle'>
-      {'Schelp'}
-      </h1>
+    <Button
+    onClick={(e) => {
+      e.preventDefault();
+      window.location.href='/';
+      }}> Schelp </Button>
       <h3 align='center'>
         {name} <Badge>{discipline}</Badge>
         <Rating name="simple-controlled" value={rating} readOnly>{labels[rating !== null ? rating : 2.5]}</Rating>

@@ -8,15 +8,13 @@ export const List = styled.ul`
 padding: 0px 25px 25px 25px;
 margin: 0px;  
 border-radius: 0.3rem !important;
-max-width: 100%;
-
-  display: flex;
-  font-size: 25px;
-  flex-direction: column;
-  text-align: center;
-  list-style-position: inside;
-  margin-left:auto;
-    margin-right: auto;
+display: flex;
+font-size: 25px;
+flex-direction: column;
+text-align: center;
+list-style-position: inside;
+margin-left:auto;
+margin-right: auto;
 `;
 
 export const ListItem = styled.li`
