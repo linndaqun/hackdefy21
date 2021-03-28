@@ -6,9 +6,15 @@ import InputForm from "../styles/InputForm";
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import labels from "../styles/InputForm";
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import "../App.css";
+import { spacing } from '@material-ui/system';
 
-const CLASS = gql`
+const CLASS_TIME = gql`
     subscription Class($id: uuid!) {
         classes_by_pk(id: $id) {
         id
@@ -20,8 +26,26 @@ const CLASS = gql`
           created_at
           rating
         }
+        rating
         }
     }
+`;
+
+const CLASS_RATING = gql`
+  subscription Class($id: uuid!) {
+    classes_by_pk(id: $id) {
+    id
+    name
+    discipline
+    reviews(order_by: {rating: desc}) {
+      id
+      body
+      created_at
+      rating
+    }
+    rating
+    }
+  }
 `;
 
 const ADD_REVIEW = gql`
@@ -32,49 +56,114 @@ const ADD_REVIEW = gql`
   }
 `;
 
+export function getAvg(newRating, reviews) {
+  var total = 0;
+  for(var i = 0; i < reviews.length; i++) {
+      total += reviews[i].rating;
+  }
+  var avg = (total + newRating) / (reviews.length + 1);
+  return Math.round(avg);
+}
+
+const UPDATE_RATING = gql `
+  mutation ($id: uuid!, $rating: Int!) {
+    UpdateClassRating(id: $id, rating: $rating) {
+      rating
+    }
+  }
+`;
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1,1,1,72),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  introduction: {
+    margin: theme.spacing(1,1,1,60),
+  },
+
+}));
 
 const Class = ({
   match: {
     params: { id },
   },
 }) => {
+  const classes = useStyles();
   const [ inputVal, setInputVal ] = useState("");
-  const [ rating, setRating ] = useState(0);
+  const [ ratingNew, setRating ] = useState(0);
+  const [CLASS, setCLASS] = useState(CLASS_TIME);
   const { loading, error, data } = useSubscription(CLASS, {
     variables: { id },
   });
 
   const [addReview] = useMutation(ADD_REVIEW);
+  const [updateRating] = useMutation(UPDATE_RATING);
 
   if (loading) return <p>Loading ...</p>;
   if (error) return <p>Error :( {error.message}</p>;
 
-  const { name, discipline, reviews } = data.classes_by_pk;
+  const { name, discipline, reviews, rating } = data.classes_by_pk;
+  var ratingAvg;
+
+  const handleChange = (event) => {
+    if (event.target.value == CLASS_TIME){
+      setCLASS(CLASS_TIME)
+    }
+    else if (event.target.value == CLASS_RATING) {
+      setCLASS(CLASS_RATING);
+    }
+  }
 
   return (
     <div>
-      <h1 align='left' padding='10px'>
-      
+      <h1 align='middle'>
       {'Schelp'}
       </h1>
       <h3 align='center'>
-      
         {name} <Badge>{discipline}</Badge>
+        <Rating name="simple-controlled" value={rating} readOnly>{labels[rating !== null ? rating : 2.5]}</Rating>
       </h3>
-      
+      <Box className={classes.introduction} >
+
+        <p>{name} teaches {discipline} at blank school </p>
+        <p>{name} has been teaching for blank year(s)</p>
+      </Box>
+      <FormControl className={classes.formControl} >
+        
+        <InputLabel shrink id="demo-simple-select-placeholder-label-label">
+          Sort By:
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-placeholder-label-label"
+          id="demo-simple-select-placeholder-label"
+          value={CLASS}
+          onChange={handleChange}
+          displayEmpty
+          className={classes.selectEmpty}
+        >
+          <MenuItem value={CLASS_TIME}>Most Recent</MenuItem>
+          <MenuItem value={CLASS_RATING}>Rating</MenuItem>
+        </Select>
+      </FormControl> 
       <InputForm
         inputVal={inputVal}
-        rating={rating}
+        rating={ratingNew}
         onChange={(e) => setInputVal(e.target.value)}
         onRatingChange={(event, newValue) => {
           setRating(newValue);
         }}
         onSubmit={() => {
-          addReview({ variables : {body : inputVal, id, rating: rating}})
+          ratingAvg = getAvg(ratingNew, reviews);
+          addReview({ variables : {body : inputVal, id, rating: ratingNew}})
           .then(() => setInputVal(""))
           .then(() => setRating(0))
-          .catch((e) => {setInputVal(e.message);
-          });
+          .catch((e) => {});
+          updateRating({ variables : { id, rating: ratingAvg}})
+          .catch((e) => {});
         } }
         buttonText="Submit"
       />
