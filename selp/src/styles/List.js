@@ -22,6 +22,9 @@ export const ListItem = styled.li`
   display: block;
   padding: 3rem 5rem;
   background-color: #acadbc;
+
+  text-align: center;
+
   color: #06D6A0;
   font-weight: bold;
   font-size: 25px;
